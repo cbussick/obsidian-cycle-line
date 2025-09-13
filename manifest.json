@@ -1,0 +1,11 @@
+{
+	"id": "cycle-line",
+	"name": "Cycle Line",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Allows you to change the line you are currently in by cycling through different options.",
+	"author": "Christopher Bussick",
+	"authorUrl": "https://cbussick.dev",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": false
+}
