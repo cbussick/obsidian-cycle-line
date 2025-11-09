@@ -13,16 +13,42 @@ export class CycleLineSettingsTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: "Cycle Line Settings" });
+		const settingDescription = document.createDocumentFragment();
 
-		const settingDescriptionFragment = document.createDocumentFragment();
-		const paragraph = document.createElement("p");
-		paragraph.innerHTML = `Automatically increment ordered lists.<br><i>Example</i>:<br><code>1. dog 🐕</code><br><code>2. cat 🐈</code><br><br>If this is disabled, ordered lists will not be automatically incremented.<br><i>Example</i>:<br><code>1. dog 🐕</code><br><code>1. cat 🐈</code><br><br>💡 If this is disabled and ordered lists are still automatically incremented, check the Obsidian setting for "Smart lists" under the "Editor" settings and turn it off.`;
-		settingDescriptionFragment.appendChild(paragraph);
+		// settingDescription.createEl("p", {
+		// });
+
+		settingDescription.createEl("p", {
+			text: "Enable this to automatically increment ordered lists.",
+		});
+		settingDescription.createEl("i", { text: "Example:" });
+
+		const incrementedListExample = settingDescription.createEl("ol");
+		incrementedListExample.createEl("li", { text: "dog 🐕" });
+		incrementedListExample.createEl("li", { text: "cat 🐈" });
+
+		settingDescription.createEl("p", {
+			text: "If this is disabled, ordered lists will not be automatically incremented.",
+		});
+		settingDescription.createEl("i", { text: "Example:" });
+
+		const notIncrementedListExample = settingDescription.createEl("ol");
+		notIncrementedListExample.createEl("li", {
+			text: "dog 🐕",
+			attr: { value: "1" },
+		});
+		notIncrementedListExample.createEl("li", {
+			text: "cat 🐈",
+			attr: { value: "1" },
+		});
+
+		settingDescription.createEl("p", {
+			text: `💡 If this is disabled and ordered lists are still automatically incremented, check the Obsidian setting for "Smart lists" under the "Editor"-settings and disable it.`,
+		});
 
 		new Setting(containerEl)
-			.setName("Auto Increment Ordered Lists")
-			.setDesc(settingDescriptionFragment)
+			.setName("Automatically increment ordered lists")
+			.setDesc(settingDescription)
 			.addToggle((toggle: ToggleComponent) => {
 				toggle
 					.setValue(this.plugin.settings.autoIncrementOrderedList)
