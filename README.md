@@ -1,12 +1,36 @@
-# Obsidian Cycle Line Plugin
+# Obsidian Cycle Line 🔁
 
-This plugin for [Obsidian](https://obsidian.md/) allows you to change the line your cursor is currently in by cycling through different options:
+"Cycle Line" is a plugin for [Obsidian](https://obsidian.md/). It allows you to change the line your cursor is currently in by cycling through different options:
 
 1. normal paragraph
+
+    ```plaintext
+    I am a normal paragraph 👋🏻
+    ```
+
 2. unordered list
+
+    ```plaintext
+    - I am an unordered list 👋🏻
+    ```
+
 3. checklist (unchecked)
+
+    ```plaintext
+    - [] I am an unchecked checklist 👋🏻
+    ```
+
 4. checklist (checked)
+
+    ```plaintext
+    - [x] I am an unordered list 👋🏻
+    ```
+
 5. ordered/numbered list
+
+    ```plaintext
+    1. I am an ordered list 👋🏻
+    ```
 
 This plugin is intentionally lightweight and only adds two new commands for you to use:
 
@@ -15,10 +39,10 @@ This plugin is intentionally lightweight and only adds two new commands for you 
 2. "Cycle Line Backwards"
    This allows you to cycle through the options _backwards_ one at a time.
 
-💡*Tip*: Add these commands as hotkeys to quickly cycle through the different options, for example:
+💡**Tip**: Add these commands as hotkeys to quickly cycle through the different options. For example:
 
-- "Cycle Line" -> `CTRL + Space`
-- "Cycl Line Backwards" -> `CTRL + Shift + Space`
+- "Cycle Line" -> `Ctrl + Space`
+- "Cycle Line Backwards" -> `Ctrl + Shift + Space`
 
 ## Manually installing the plugin
 
