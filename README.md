@@ -1,12 +1,48 @@
 # Obsidian Cycle Line Plugin
 
-This plugin for Obsidian allows you to change the line you are currently in by cycling through different options:
+This plugin for [Obsidian](https://obsidian.md/) allows you to change the line your cursor is currently in by cycling through different options:
 
 1. normal paragraph
-2. bullet list
-3. check list (unchecked)
-4. check list (checked)
-5. numbered list
+2. unordered list
+3. checklist (unchecked)
+4. checklist (checked)
+5. ordered/numbered list
+
+This plugin is intentionally lightweight and only adds two new commands for you to use:
+
+1. "Cycle Line"
+   This allows you to cycle through the options above _forwards_ one at a time.
+2. "Cycle Line Backwards"
+   This allows you to cycle through the options _backwards_ one at a time.
+
+💡*Tip*: Add these commands as hotkeys to quickly cycle through the different options, for example:
+
+- "Cycle Line" -> `CTRL + Space`
+- "Cycl Line Backwards" -> `CTRL + Shift + Space`
+
+## Manually installing the plugin
+
+Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+
+## Development set up
+
+For making changes to the source code, you need to:
+
+1. Clone the repository
+2. Install the dependencies:
+
+    ```shell
+    npm install
+    ```
+
+3. Start the esbuild watch mode, which will build the project:
+
+    ```shell
+    npm run dev
+    ```
+
+4. Make changes 👷🏻
+5. You're Done ✅
 
 ## Releasing new releases
 
@@ -18,18 +54,3 @@ This plugin for Obsidian allows you to change the line you are currently in by c
 
 > You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
 > The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
-
-## Adding your plugin to the community plugin list
-
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## API Documentation
-
-See https://github.com/obsidianmd/obsidian-api

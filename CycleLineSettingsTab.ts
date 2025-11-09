@@ -17,17 +17,17 @@ export class CycleLineSettingsTab extends PluginSettingTab {
 
 		const settingDescriptionFragment = document.createDocumentFragment();
 		const paragraph = document.createElement("p");
-		paragraph.innerHTML = `Automatically increment numbered lists.<br>E.g.:<br><code>1. dog</code><br><code>2. cat</code><br><br>If not enabled, the list will not be automatically incremented.<br>E.g.<br><code>1. dog</code><br><code>1. cat</code><br><br> If this is disabled and the lists are still automaticaly incremented, check the Obsidian setting for "Smart lists" and turn it off.`;
+		paragraph.innerHTML = `Automatically increment ordered lists.<br><i>Example</i>:<br><code>1. dog 🐕</code><br><code>2. cat 🐈</code><br><br>If this is disabled, ordered lists will not be automatically incremented.<br><i>Example</i>:<br><code>1. dog 🐕</code><br><code>1. cat 🐈</code><br><br>💡 If this is disabled and ordered lists are still automatically incremented, check the Obsidian setting for "Smart lists" under the "Editor" settings and turn it off.`;
 		settingDescriptionFragment.appendChild(paragraph);
 
 		new Setting(containerEl)
-			.setName("Auto Increment Numbered List")
+			.setName("Auto Increment Ordered Lists")
 			.setDesc(settingDescriptionFragment)
 			.addToggle((toggle: ToggleComponent) => {
 				toggle
-					.setValue(this.plugin.settings.autoIncrementNumberedList)
+					.setValue(this.plugin.settings.autoIncrementOrderedList)
 					.onChange(async (value) => {
-						this.plugin.settings.autoIncrementNumberedList = value;
+						this.plugin.settings.autoIncrementOrderedList = value;
 						await this.plugin.saveSettings();
 					});
 			});

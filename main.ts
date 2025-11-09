@@ -3,24 +3,23 @@ import { normalizeIndentation } from "helpers/normalizeIndentation";
 import { Editor, Plugin } from "obsidian";
 
 interface CycleLinePluginSettings {
-	// Increment a numbered list line automatically based on the line above.
-	autoIncrementNumberedList: boolean;
+	autoIncrementOrderedList: boolean;
 }
 
 const defaultSettings: CycleLinePluginSettings = {
-	autoIncrementNumberedList: true,
+	autoIncrementOrderedList: true,
 };
 
-const bulletListStart = "- ";
-const checkListStart = "- [ ] ";
-const checkListDoneStart = "- [x] ";
-const numberedListStart = /^\d+\. /;
+const unorderedListStart = "- ";
+const checklistStart = "- [ ] ";
+const checklistDoneStart = "- [x] ";
+const orderedListStart = /^\d+\. /;
 
 const listOptionPrefixes: (string | RegExp)[] = [
-	bulletListStart,
-	checkListStart,
-	checkListDoneStart,
-	numberedListStart,
+	unorderedListStart,
+	checklistStart,
+	checklistDoneStart,
+	orderedListStart,
 ];
 
 export default class CycleLinePlugin extends Plugin {
@@ -43,35 +42,37 @@ export default class CycleLinePlugin extends Plugin {
 		// in order to know which list it should be turned into.
 		let oldListOptionsIndex = listOptionPrefixes.findIndex((option) => {
 			if (option instanceof RegExp) {
+				// If it is a regular expression, it can *only* be an ordered list.
 				return option.test(lineContentWithoutIndentation);
 			} else {
 				return lineContentWithoutIndentation.startsWith(option);
 			}
 		});
 
-		// If the check resulted in it being a bullet list, it could still be a check list (checked and unchecked),
-		// since they have the same prefix "- ", so we need to check if it is a check list here.
+		// If the check resulted in it being an unordered list, it could still be a checklist (checked and unchecked),
+		// since they have the same prefix "- ", so we need to furthermore check if it is a check list here.
 		if (
-			oldListOptionsIndex === listOptionPrefixes.indexOf(bulletListStart)
+			oldListOptionsIndex ===
+			listOptionPrefixes.indexOf(unorderedListStart)
 		) {
-			if (lineContentWithoutIndentation.startsWith(checkListStart)) {
+			if (lineContentWithoutIndentation.startsWith(checklistStart)) {
 				oldListOptionsIndex =
-					listOptionPrefixes.indexOf(checkListStart);
+					listOptionPrefixes.indexOf(checklistStart);
 			} else if (
-				lineContentWithoutIndentation.startsWith(checkListDoneStart)
+				lineContentWithoutIndentation.startsWith(checklistDoneStart)
 			) {
 				oldListOptionsIndex =
-					listOptionPrefixes.indexOf(checkListDoneStart);
+					listOptionPrefixes.indexOf(checklistDoneStart);
 			}
 		}
 
 		const oldListPrefix = listOptionPrefixes[oldListOptionsIndex];
 		let oldListPrefixLength: number;
-		let newLineNumberedListPrefix = "1. ";
+		let newLineOrderedListPrefix = "1. ";
 
-		const isTurningIntoNumberedList =
+		const isTurningIntoOrderedList =
 			oldListOptionsIndex ===
-			listOptionPrefixes.indexOf(numberedListStart) - 1;
+			listOptionPrefixes.indexOf(orderedListStart) - 1;
 
 		// The indentation.
 		// If there is no non-whitespace character, the whole line (i.e. tabs and space characters) is considered the indentation.
@@ -81,21 +82,21 @@ export default class CycleLinePlugin extends Plugin {
 				: oldLineContent;
 
 		if (oldListPrefix instanceof RegExp) {
-			// If the line is a numbered list, we need to find the length of the old list prefix.
+			// If the line is an ordered list, we need to find the length of the old list prefix.
 			// Examples
-			// "1." -> length: 3
-			// "15." -> length: 4
-			const match = numberedListStart.exec(lineContentWithoutIndentation);
+			// "1. " -> length: 3
+			// "15. " -> length: 4
+			const match = orderedListStart.exec(lineContentWithoutIndentation);
 			oldListPrefixLength = match?.[0].length ?? 0;
 		} else {
 			oldListPrefixLength = oldListPrefix?.length || 0;
 
 			if (
-				isTurningIntoNumberedList &&
-				this.settings.autoIncrementNumberedList
+				isTurningIntoOrderedList &&
+				this.settings.autoIncrementOrderedList
 			) {
-				// If we are turning the line *into* a numbered list, we need to add the correct number.
-				// I.e. auto-increment if the line above is also a numbered list line.
+				// If we are turning the line *into* an ordered list and the setting is enabled, we need to add the correct number.
+				// I.e. auto-increment if the line above is also an ordered list line.
 
 				const lineAbove =
 					lineNumber > 0 ? editor.getLine(lineNumber - 1) : null;
@@ -117,22 +118,23 @@ export default class CycleLinePlugin extends Plugin {
 							lineAbovefirstNonWhitespaceCharIndex,
 						);
 
-						const lineAboveNumberedListMatch =
-							numberedListStart.exec(lineAboveWithoutIndentation);
+						const lineAboveOrderedListMatch = orderedListStart.exec(
+							lineAboveWithoutIndentation,
+						);
 
-						if (lineAboveNumberedListMatch !== null) {
-							newLineNumberedListPrefix = `${Number.parseInt(lineAboveNumberedListMatch[0].slice(0, -2)) + 1}. `;
+						if (lineAboveOrderedListMatch !== null) {
+							newLineOrderedListPrefix = `${Number.parseInt(lineAboveOrderedListMatch[0].slice(0, -2)) + 1}. `;
 						}
 					}
 				}
 			}
 		}
-		// If the line:
+		// If the line ...
 		// - is the last list option, cycle back to a normal paragraph.
-		// - is a type of list, turn it into the next type of list.
-		// - is not a list (i.e. a "normal" paragraph), make it the first list option.
-		const newLineListPrefix = isTurningIntoNumberedList
-			? newLineNumberedListPrefix
+		// - is some other type of list, turn it into the next type of list.
+		// - is not a list (i.e. a normal paragraph), make it the first list option.
+		const newLineListPrefix = isTurningIntoOrderedList
+			? newLineOrderedListPrefix
 			: `${
 					oldListOptionsIndex === listOptionPrefixes.length - 1
 						? ""
@@ -149,7 +151,7 @@ export default class CycleLinePlugin extends Plugin {
 			newLineContent.length - oldLineContent.length;
 
 		// Move the cursor to the new correct position:
-		// Take the old position and offset it by how many characters were added/removed.
+		// Take the old cursor position and offset it by how many characters were added/removed.
 		const newCursorPosition = oldCursorPosition + characterAmountDifference;
 
 		editor.setLine(lineNumber, newLineContent);
