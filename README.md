@@ -64,7 +64,7 @@ For making changes to the source code, you need to:
     ```
 
 4. Make changes 👷🏻
-5. You're Done ✅
+5. You're done ✅
 
 ## Releasing new releases
 
