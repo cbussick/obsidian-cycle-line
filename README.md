@@ -11,25 +11,25 @@
 2. Unordered list
 
     ```plaintext
-    - I am an unordered list 👋🏻
+    - I am an unordered list 📃
     ```
 
 3. Checklist (unchecked)
 
     ```plaintext
-    - [ ] I am an unchecked checklist 👋🏻
+    - [ ] I am an unchecked checklist 👷🏻
     ```
 
 4. Checklist (checked)
 
     ```plaintext
-    - [x] I am an unordered list 👋🏻
+    - [x] I am a checked checklist ✅
     ```
 
 5. Ordered list
 
     ```plaintext
-    1. I am an ordered list 👋🏻
+    1. I am an ordered list 🔢
     ```
 
 This plugin is intentionally lightweight and only adds two new commands for you to use:
