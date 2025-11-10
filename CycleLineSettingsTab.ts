@@ -24,8 +24,8 @@ export class CycleLineSettingsTab extends PluginSettingTab {
 		settingDescription.createEl("i", { text: "Example:" });
 
 		const incrementedListExample = settingDescription.createEl("ol");
-		incrementedListExample.createEl("li", { text: "dog 🐕" });
-		incrementedListExample.createEl("li", { text: "cat 🐈" });
+		incrementedListExample.createEl("li", { text: "Dog 🐕" });
+		incrementedListExample.createEl("li", { text: "Cat 🐈" });
 
 		settingDescription.createEl("p", {
 			text: "If this is disabled, ordered lists will not be automatically incremented.",
@@ -34,16 +34,16 @@ export class CycleLineSettingsTab extends PluginSettingTab {
 
 		const notIncrementedListExample = settingDescription.createEl("ol");
 		notIncrementedListExample.createEl("li", {
-			text: "dog 🐕",
+			text: "Dog 🐕",
 			attr: { value: "1" },
 		});
 		notIncrementedListExample.createEl("li", {
-			text: "cat 🐈",
+			text: "Cat 🐈",
 			attr: { value: "1" },
 		});
 
 		settingDescription.createEl("p", {
-			text: `💡 If this is disabled and ordered lists are still automatically incremented, check the Obsidian setting for "Smart lists" under the "Editor"-settings and disable it.`,
+			text: `💡 If this is disabled and ordered lists are still automatically incremented, check the Obsidian setting for "smart lists" under the "editor"-settings and disable it.`,
 		});
 
 		new Setting(containerEl)

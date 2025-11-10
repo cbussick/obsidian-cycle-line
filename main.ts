@@ -165,16 +165,16 @@ export default class CycleLinePlugin extends Plugin {
 		await this.loadSettings();
 
 		this.addCommand({
-			id: "cycle-line",
-			name: "Cycle Line",
+			id: "cycle-forwards",
+			name: "Cycle forwards",
 			editorCallback: (editor: Editor) => {
 				this.cycleLine(listOptionPrefixes, editor);
 			},
 		});
 
 		this.addCommand({
-			id: "cycle-line-backwards",
-			name: "Cycle Line Backwards",
+			id: "cycle-backwards",
+			name: "Cycle backwards",
 			editorCallback: (editor: Editor) => {
 				this.cycleLine([...listOptionPrefixes].reverse(), editor);
 			},
