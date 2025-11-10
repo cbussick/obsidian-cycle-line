@@ -44,7 +44,7 @@ This plugin is intentionally lightweight and only adds two new commands for you 
 
 ## Manually installing the plugin
 
-Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+Copy over `main.js` and `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
 
 ## Development set up
 
