@@ -17,7 +17,7 @@
 3. Checklist (unchecked)
 
     ```plaintext
-    - [] I am an unchecked checklist 👋🏻
+    - [ ] I am an unchecked checklist 👋🏻
     ```
 
 4. Checklist (checked)
