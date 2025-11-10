@@ -2,31 +2,31 @@
 
 "Cycle Line" is a plugin for [Obsidian](https://obsidian.md/). It allows you to change the line your cursor is currently in by cycling through different options:
 
-1. normal paragraph
+1. Normal paragraph
 
     ```plaintext
     I am a normal paragraph 👋🏻
     ```
 
-2. unordered list
+2. Unordered list
 
     ```plaintext
     - I am an unordered list 👋🏻
     ```
 
-3. checklist (unchecked)
+3. Checklist (unchecked)
 
     ```plaintext
     - [] I am an unchecked checklist 👋🏻
     ```
 
-4. checklist (checked)
+4. Checklist (checked)
 
     ```plaintext
     - [x] I am an unordered list 👋🏻
     ```
 
-5. ordered/numbered list
+5. Ordered list
 
     ```plaintext
     1. I am an ordered list 👋🏻
