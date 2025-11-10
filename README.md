@@ -34,15 +34,15 @@
 
 This plugin is intentionally lightweight and only adds two new commands for you to use:
 
-1. "Cycle Line"
+1. "Cycle forwards"
    This allows you to cycle through the options above _forwards_ one at a time.
-2. "Cycle Line Backwards"
+2. "Cycle backwards"
    This allows you to cycle through the options _backwards_ one at a time.
 
 💡**Tip**: Add these commands as hotkeys to quickly cycle through the different options. For example:
 
-- "Cycle Line" -> `Ctrl + Space`
-- "Cycle Line Backwards" -> `Ctrl + Shift + Space`
+- "Cycle forwards" -> `Ctrl + Space`
+- "Cycle backwards" -> `Ctrl + Shift + Space`
 
 ## Manually installing the plugin
 
